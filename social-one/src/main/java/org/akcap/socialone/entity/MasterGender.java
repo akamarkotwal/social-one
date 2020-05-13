@@ -3,6 +3,10 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -22,6 +26,7 @@ public class MasterGender implements Serializable {
 	private String gender;
 
 	//bi-directional many-to-one association to UserInfomation
+	
 	@OneToMany(mappedBy="masterGender")
 	private List<UserInfomation> userInfomations;
 
@@ -44,6 +49,7 @@ public class MasterGender implements Serializable {
 		this.gender = gender;
 	}
 
+	@JsonIgnore
 	public List<UserInfomation> getUserInfomations() {
 		return this.userInfomations;
 	}

@@ -3,6 +3,9 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +23,7 @@ public class UserInfomation implements Serializable {
 	@Id
 	private int id;
 
-	private int createdBy;
+	private Integer createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
@@ -38,7 +41,7 @@ public class UserInfomation implements Serializable {
 
 	private String password;
 
-	private int updatedBy;
+	private Integer updatedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
@@ -106,6 +109,7 @@ public class UserInfomation implements Serializable {
 	private List<Share> shares;
 
 	//bi-directional many-to-one association to MasterGender
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="Gender")
 	private MasterGender masterGender;
@@ -125,11 +129,11 @@ public class UserInfomation implements Serializable {
 		this.id = id;
 	}
 
-	public int getCreatedBy() {
+	public Integer getCreatedBy() {
 		return this.createdBy;
 	}
 
-	public void setCreatedBy(int createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -189,11 +193,11 @@ public class UserInfomation implements Serializable {
 		this.password = password;
 	}
 
-	public int getUpdatedBy() {
+	public Integer getUpdatedBy() {
 		return this.updatedBy;
 	}
 
-	public void setUpdatedBy(int updatedBy) {
+	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 

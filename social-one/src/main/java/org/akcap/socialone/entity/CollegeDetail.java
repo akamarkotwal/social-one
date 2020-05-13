@@ -23,7 +23,7 @@ public class CollegeDetail implements Serializable {
 
 	private String collageName;
 
-	private int createdBy;
+	private Integer createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
@@ -34,7 +34,7 @@ public class CollegeDetail implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
 
-	private int updatedBy;
+	private Integer updatedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
@@ -81,11 +81,11 @@ public class CollegeDetail implements Serializable {
 		this.collageName = collageName;
 	}
 
-	public int getCreatedBy() {
+	public Integer getCreatedBy() {
 		return this.createdBy;
 	}
 
-	public void setCreatedBy(int createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -113,11 +113,11 @@ public class CollegeDetail implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public int getUpdatedBy() {
+	public Integer getUpdatedBy() {
 		return this.updatedBy;
 	}
 
-	public void setUpdatedBy(int updatedBy) {
+	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 

@@ -18,7 +18,7 @@ public class AddFriend implements Serializable {
 	@Id
 	private int id;
 
-	private int createdBy;
+	private Integer createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
@@ -34,7 +34,7 @@ public class AddFriend implements Serializable {
 
 	private int status;
 
-	private int updatedBy;
+	private Integer updatedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
@@ -60,11 +60,11 @@ public class AddFriend implements Serializable {
 		this.id = id;
 	}
 
-	public int getCreatedBy() {
+	public Integer getCreatedBy() {
 		return this.createdBy;
 	}
 
-	public void setCreatedBy(int createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -116,11 +116,11 @@ public class AddFriend implements Serializable {
 		this.status = status;
 	}
 
-	public int getUpdatedBy() {
+	public Integer getUpdatedBy() {
 		return this.updatedBy;
 	}
 
-	public void setUpdatedBy(int updatedBy) {
+	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
