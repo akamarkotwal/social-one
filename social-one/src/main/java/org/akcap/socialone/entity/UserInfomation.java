@@ -109,7 +109,7 @@ public class UserInfomation implements Serializable {
 	private List<Share> shares;
 
 	//bi-directional many-to-one association to MasterGender
-	@JsonBackReference
+	
 	@ManyToOne
 	@JoinColumn(name="Gender")
 	private MasterGender masterGender;
