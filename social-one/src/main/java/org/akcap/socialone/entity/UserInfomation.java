@@ -21,17 +21,20 @@ public class UserInfomation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private Integer createdBy;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	
 	private Date createdDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	
 	private Date dob;
 
 	private String fname;
+	
+	private String email;
 
 	private byte isActive;
 
@@ -43,7 +46,7 @@ public class UserInfomation implements Serializable {
 
 	private Integer updatedBy;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	
 	private Date updatedDate;
 
 	private String userName;
@@ -215,6 +218,15 @@ public class UserInfomation implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public List<AddFriend> getAddFriends1() {
