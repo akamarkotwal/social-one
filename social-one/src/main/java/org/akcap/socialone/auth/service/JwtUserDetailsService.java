@@ -36,29 +36,5 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	}
 
-	public UserInfomation save(UserDTO userDTO) {
 
-		UserInfomation infomation1 = userRepo.findByEmail(userDTO.getEmail());
-		if (infomation1 != null) {
-			System.out.println("record alredy exists");
-
-		}
-
-		UserInfomation infomation = new UserInfomation();
-		infomation.setFname(userDTO.getFname());
-		infomation.setLname(userDTO.getLname());
-		infomation.setDob(userDTO.getDob());
-		infomation.setUserName(userDTO.getEmail());
-		infomation.setEmail(userDTO.getEmail());
-		infomation.setCreatedDate(new Date());
-		infomation.setUpdatedDate(new Date());
-		infomation.setPassword(bcryptEncoder.encode(userDTO.getPassword()));
-		infomation.setIsActive((byte) 1);
-		infomation.setIsDelete((byte) 0);
-		MasterGender gender = new MasterGender();
-		gender.setId(userDTO.getGenderId());
-		infomation.setMasterGender(gender);
-		return userRepo.save(infomation);
-
-	}
 }

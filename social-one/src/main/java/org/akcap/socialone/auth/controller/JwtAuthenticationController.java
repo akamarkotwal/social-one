@@ -5,10 +5,8 @@ import org.akcap.socialone.auth.model.JwtResponse;
 import org.akcap.socialone.auth.model.UserDTO;
 import org.akcap.socialone.auth.model.UserResponse;
 import org.akcap.socialone.auth.service.JwtUserDetailsService;
-import org.akcap.socialone.entity.MasterGender;
 import org.akcap.socialone.entity.UserInfomation;
 import org.akcap.socialone.util.JwtTokenUtil;
-import org.akcap.socialone.util.ResponseMessage;
 import org.akcap.socialone.util.SingaleResponceMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,30 +47,7 @@ public class JwtAuthenticationController {
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
-	@PostMapping(value = "/register")
-	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-
-		SingaleResponceMessages<?> responseMessage = new SingaleResponceMessages<>();
-
-		UserInfomation infomation = userDetailsService.save(user);
-		if (infomation != null) {
-			UserResponse response = new UserResponse();
-			response.setUserID(infomation.getId());
-			response.setUserName(infomation.getUserName());
-			responseMessage.setStatuscode(1);
-			responseMessage.setStatus("Success");
-			responseMessage.setMessage("User Record Insert Successfully");
-			responseMessage.setData(response);
-
-			return ResponseEntity.ok(responseMessage);
-		} else {
-			responseMessage.setStatuscode(1);
-			responseMessage.setStatus("Success");
-			responseMessage.setMessage("User Record Insert Successfully");
-			responseMessage.setData(null);
-			return ResponseEntity.ok(responseMessage);
-		}
-	}
+	
 
 	private void authenticate(String username, String password) throws Exception {
 		try {
