@@ -4,6 +4,8 @@ package org.akcap.socialone.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the master_city database table.
@@ -44,6 +46,7 @@ public class MasterCity implements Serializable {
 		this.name = name;
 	}
 
+	@JsonIgnore
 	public MasterState getMasterState() {
 		return this.masterState;
 	}

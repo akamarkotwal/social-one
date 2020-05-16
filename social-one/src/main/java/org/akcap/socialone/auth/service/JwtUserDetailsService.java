@@ -1,11 +1,8 @@
 package org.akcap.socialone.auth.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import org.akcap.socialone.auth.model.UserDTO;
 import org.akcap.socialone.auth.repo.UserRepo;
-import org.akcap.socialone.entity.MasterGender;
 import org.akcap.socialone.entity.UserInfomation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

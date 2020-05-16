@@ -2,12 +2,8 @@ package org.akcap.socialone.auth.controller;
 
 import org.akcap.socialone.auth.model.JwtRequest;
 import org.akcap.socialone.auth.model.JwtResponse;
-import org.akcap.socialone.auth.model.UserDTO;
-import org.akcap.socialone.auth.model.UserResponse;
 import org.akcap.socialone.auth.service.JwtUserDetailsService;
-import org.akcap.socialone.entity.UserInfomation;
 import org.akcap.socialone.util.JwtTokenUtil;
-import org.akcap.socialone.util.SingaleResponceMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

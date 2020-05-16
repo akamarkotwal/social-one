@@ -1,8 +1,9 @@
 package org.akcap.socialone.userdetailes.controller;
 
-import org.akcap.socialone.auth.model.UserResponse;
+
 import org.akcap.socialone.entity.UserInfomation;
 import org.akcap.socialone.userdetailes.model.UserDTO;
+import org.akcap.socialone.userdetailes.model.UserResponse;
 import org.akcap.socialone.userdetailes.service.UserRegisterServices;
 import org.akcap.socialone.util.SingaleResponceMessages;
 import org.apache.logging.log4j.LogManager;
