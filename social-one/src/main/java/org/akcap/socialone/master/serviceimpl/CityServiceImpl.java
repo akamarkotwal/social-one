@@ -15,8 +15,10 @@ public class CityServiceImpl implements CityService {
 	private CityRepo cityRepo;
 
 	@Override
+	
 	public List<MasterCity> getall() {
 		// TODO Auto-generated method stub
+		
 		return cityRepo.findAll();
 	}
 
