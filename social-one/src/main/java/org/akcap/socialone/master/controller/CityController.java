@@ -25,13 +25,13 @@ public class CityController {
 		if (genderList.isEmpty() != true) {
 			response.setStatuscode(1);
 			response.setStatus("Success");
-			response.setMessage("Getting List of Country Successfully");
+			response.setMessage("Getting List of City Successfully");
 			response.setData(genderList);
 			return ResponseEntity.ok().body(response);
 		} else {
 			response.setStatuscode(0);
 			response.setStatus("Failure");
-			response.setMessage("Getting List of Country Failed");
+			response.setMessage("Getting List of City Failed");
 			response.setData(null);
 			return ResponseEntity.ok().body(response);
 		}

@@ -3,6 +3,8 @@ package org.akcap.socialone.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="master_country")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="MasterCountry.findAll", query="SELECT m FROM MasterCountry m")
 public class MasterCountry implements Serializable {
 	private static final long serialVersionUID = 1L;

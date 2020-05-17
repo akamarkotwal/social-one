@@ -2,6 +2,9 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.util.Date;
 
 
@@ -11,6 +14,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name="highschool_details")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="HighschoolDetail.findAll", query="SELECT h FROM HighschoolDetail h")
 public class HighschoolDetail implements Serializable {
 	private static final long serialVersionUID = 1L;

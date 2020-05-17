@@ -3,6 +3,9 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.util.Date;
 
 
@@ -12,6 +15,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name="comments_like")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="CommentsLike.findAll", query="SELECT c FROM CommentsLike c")
 public class CommentsLike implements Serializable {
 	private static final long serialVersionUID = 1L;

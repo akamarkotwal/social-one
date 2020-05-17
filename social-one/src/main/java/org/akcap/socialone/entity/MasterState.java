@@ -3,6 +3,9 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.util.List;
 
 
@@ -11,6 +14,8 @@ import java.util.List;
  * 
  */
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name="master_state")
 @NamedQuery(name="MasterState.findAll", query="SELECT m FROM MasterState m")
 public class MasterState implements Serializable {
@@ -22,7 +27,7 @@ public class MasterState implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to MasterCity
-	@OneToMany(mappedBy="masterState")
+	@OneToMany(mappedBy="masterState",fetch = FetchType.LAZY )
 	private List<MasterCity> masterCities;
 
 	//bi-directional many-to-one association to MasterCountry

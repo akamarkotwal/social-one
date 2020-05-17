@@ -3,6 +3,9 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.util.Date;
 
 
@@ -12,6 +15,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name="comment_reply")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="CommentReply.findAll", query="SELECT c FROM CommentReply c")
 public class CommentReply implements Serializable {
 	private static final long serialVersionUID = 1L;
