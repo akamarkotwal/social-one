@@ -1,10 +1,12 @@
 package org.akcap.socialone.auth.service;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.akcap.socialone.auth.repo.UserRepo;
 import org.akcap.socialone.entity.UserInfomation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,9 +31,17 @@ public class JwtUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
 		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
-				new ArrayList<>());
+				getAuthority(user));
 
 	}
 
+	private Set getAuthority(UserInfomation user) {
+        Set authorities = new HashSet<>();
+		user.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
+		});
+		return authorities;
+	}
+	
 
 }
