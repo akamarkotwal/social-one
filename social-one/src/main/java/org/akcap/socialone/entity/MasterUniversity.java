@@ -3,6 +3,9 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -44,6 +47,7 @@ public class MasterUniversity implements Serializable {
 		this.name = name;
 	}
 
+	@JsonIgnore
 	public List<CollegeDetail> getCollegeDetails() {
 		return this.collegeDetails;
 	}

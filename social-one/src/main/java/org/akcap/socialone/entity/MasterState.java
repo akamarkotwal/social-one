@@ -6,6 +6,9 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 
@@ -27,11 +30,13 @@ public class MasterState implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to MasterCity
-	@OneToMany(mappedBy="masterState",fetch = FetchType.LAZY )
+	
+	@OneToMany(mappedBy="masterState")
 	private List<MasterCity> masterCities;
 
 	//bi-directional many-to-one association to MasterCountry
-	@ManyToOne
+	
+	@ManyToOne()
 	@JoinColumn(name="CountryID")
 	private MasterCountry masterCountry;
 
@@ -54,6 +59,7 @@ public class MasterState implements Serializable {
 		this.name = name;
 	}
 
+	@JsonIgnore
 	public List<MasterCity> getMasterCities() {
 		return this.masterCities;
 	}
@@ -76,6 +82,7 @@ public class MasterState implements Serializable {
 		return masterCity;
 	}
 
+	@JsonIgnore
 	public MasterCountry getMasterCountry() {
 		return this.masterCountry;
 	}
