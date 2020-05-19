@@ -1,11 +1,7 @@
 package org.akcap.socialone.entity;
 
-
 import java.io.Serializable;
 import javax.persistence.*;
-
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import java.util.Date;
 
 
@@ -15,8 +11,6 @@ import java.util.Date;
  */
 @Entity
 @Table(name="personal_address")
-@Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="PersonalAddress.findAll", query="SELECT p FROM PersonalAddress p")
 public class PersonalAddress implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -41,6 +35,21 @@ public class PersonalAddress implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
+
+	//bi-directional many-to-one association to MasterCity
+	@ManyToOne
+	@JoinColumn(name="CityID")
+	private MasterCity masterCity;
+
+	//bi-directional many-to-one association to MasterCountry
+	@ManyToOne
+	@JoinColumn(name="CountryID")
+	private MasterCountry masterCountry;
+
+	//bi-directional many-to-one association to MasterState
+	@ManyToOne
+	@JoinColumn(name="StateID")
+	private MasterState masterState;
 
 	//bi-directional many-to-one association to UserInfomation
 	@ManyToOne
@@ -120,6 +129,30 @@ public class PersonalAddress implements Serializable {
 
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	public MasterCity getMasterCity() {
+		return this.masterCity;
+	}
+
+	public void setMasterCity(MasterCity masterCity) {
+		this.masterCity = masterCity;
+	}
+
+	public MasterCountry getMasterCountry() {
+		return this.masterCountry;
+	}
+
+	public void setMasterCountry(MasterCountry masterCountry) {
+		this.masterCountry = masterCountry;
+	}
+
+	public MasterState getMasterState() {
+		return this.masterState;
+	}
+
+	public void setMasterState(MasterState masterState) {
+		this.masterState = masterState;
 	}
 
 	public UserInfomation getUserInfomation() {
