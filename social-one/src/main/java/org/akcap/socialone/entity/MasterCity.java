@@ -2,11 +2,15 @@ package org.akcap.socialone.entity;
 
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 
 /**
@@ -22,7 +26,7 @@ public class MasterCity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private short id;
+	private int id;
 
 	private String name;
 
@@ -30,15 +34,18 @@ public class MasterCity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="StateId")
 	private MasterState masterState;
+	
+	@OneToMany(mappedBy="masterCity")
+	private List<PersonalAddress> personalAddresses;
 
 	public MasterCity() {
 	}
 
-	public short getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -57,6 +64,27 @@ public class MasterCity implements Serializable {
 
 	public void setMasterState(MasterState masterState) {
 		this.masterState = masterState;
+	}
+	public List<PersonalAddress> getPersonalAddresses() {
+		return this.personalAddresses;
+	}
+
+	public void setPersonalAddresses(List<PersonalAddress> personalAddresses) {
+		this.personalAddresses = personalAddresses;
+	}
+
+	public PersonalAddress addPersonalAddress(PersonalAddress personalAddress) {
+		getPersonalAddresses().add(personalAddress);
+		personalAddress.setMasterCity(this);
+
+		return personalAddress;
+	}
+
+	public PersonalAddress removePersonalAddress(PersonalAddress personalAddress) {
+		getPersonalAddresses().remove(personalAddress);
+		personalAddress.setMasterCity(null);
+
+		return personalAddress;
 	}
 
 }

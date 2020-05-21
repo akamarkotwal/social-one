@@ -616,4 +616,19 @@ public class UserInfomation implements Serializable {
 		return userSociallink;
 	}
 
+	@Override
+	public String toString() {
+		return "UserInfomation [id=" + id + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", dob=" + dob
+				+ ", fname=" + fname + ", email=" + email + ", isActive=" + isActive + ", isDelete=" + isDelete
+				+ ", lname=" + lname + ", password=" + password + ", updatedBy=" + updatedBy + ", updatedDate="
+				+ updatedDate + ", userName=" + userName + ", roles=" + roles + ", addFriends1=" + addFriends1
+				+ ", addFriends2=" + addFriends2 + ", collegeDetails=" + collegeDetails + ", commentReplies="
+				+ commentReplies + ", comments=" + comments + ", commentsLikes=" + commentsLikes + ", friendships1="
+				+ friendships1 + ", friendships2=" + friendships2 + ", highschoolDetails=" + highschoolDetails
+				+ ", personalAddresses=" + personalAddresses + ", personalDetails=" + personalDetails + ", postLikes="
+				+ postLikes + ", posts=" + posts + ", professionalDetails=" + professionalDetails + ", shares=" + shares
+				+ ", masterGender=" + masterGender + ", userSociallinks=" + userSociallinks + "]";
+	}
+
+	
 }

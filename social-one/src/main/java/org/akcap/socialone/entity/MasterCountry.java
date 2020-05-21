@@ -7,6 +7,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
 import java.util.List;
 
 
@@ -23,7 +25,7 @@ public class MasterCountry implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private short id;
+	private int id;
 
 	private String currency;
 
@@ -34,15 +36,18 @@ public class MasterCountry implements Serializable {
 	//bi-directional many-to-one association to MasterState
 	@OneToMany(mappedBy="masterCountry")
 	private List<MasterState> masterStates;
+	
+	@OneToMany(mappedBy="masterCountry")
+	private List<PersonalAddress> personalAddresses;
 
 	public MasterCountry() {
 	}
 
-	public short getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -91,6 +96,27 @@ public class MasterCountry implements Serializable {
 		masterState.setMasterCountry(null);
 
 		return masterState;
+	}
+	public List<PersonalAddress> getPersonalAddresses() {
+		return this.personalAddresses;
+	}
+
+	public void setPersonalAddresses(List<PersonalAddress> personalAddresses) {
+		this.personalAddresses = personalAddresses;
+	}
+
+	public PersonalAddress addPersonalAddress(PersonalAddress personalAddress) {
+		getPersonalAddresses().add(personalAddress);
+		personalAddress.setMasterCountry(this);
+
+		return personalAddress;
+	}
+
+	public PersonalAddress removePersonalAddress(PersonalAddress personalAddress) {
+		getPersonalAddresses().remove(personalAddress);
+		personalAddress.setMasterCountry(null);
+
+		return personalAddress;
 	}
 
 }

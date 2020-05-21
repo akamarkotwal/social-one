@@ -2,14 +2,21 @@ package org.akcap.socialone.entity;
 
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.List;
 
 
 /**
@@ -25,7 +32,7 @@ public class MasterState implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private short id;
+	private int id;
 
 	private String name;
 
@@ -39,15 +46,18 @@ public class MasterState implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name="CountryID")
 	private MasterCountry masterCountry;
+	
+	@OneToMany(mappedBy="masterState")
+	private List<PersonalAddress> personalAddresses;
 
 	public MasterState() {
 	}
 
-	public short getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -89,6 +99,27 @@ public class MasterState implements Serializable {
 
 	public void setMasterCountry(MasterCountry masterCountry) {
 		this.masterCountry = masterCountry;
+	}
+	public List<PersonalAddress> getPersonalAddresses() {
+		return this.personalAddresses;
+	}
+
+	public void setPersonalAddresses(List<PersonalAddress> personalAddresses) {
+		this.personalAddresses = personalAddresses;
+	}
+
+	public PersonalAddress addPersonalAddress(PersonalAddress personalAddress) {
+		getPersonalAddresses().add(personalAddress);
+		personalAddress.setMasterState(this);
+
+		return personalAddress;
+	}
+
+	public PersonalAddress removePersonalAddress(PersonalAddress personalAddress) {
+		getPersonalAddresses().remove(personalAddress);
+		personalAddress.setMasterState(null);
+
+		return personalAddress;
 	}
 
 }

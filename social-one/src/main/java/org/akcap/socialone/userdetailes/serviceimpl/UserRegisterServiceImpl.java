@@ -37,6 +37,7 @@ public class UserRegisterServiceImpl implements UserRegisterServices {
 		infomation.setIsDelete((byte) 0);
 		MasterGender gender = new MasterGender();
 		gender.setId(userDTO.getGenderId());
+		
 		infomation.setMasterGender(gender);
 		return userRepo.save(infomation);
 		

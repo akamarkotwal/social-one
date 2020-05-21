@@ -2,58 +2,61 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import java.util.Date;
 
 /**
  * The persistent class for the personal_address database table.
  * 
  */
 @Entity
-@Table(name="personal_address")
-@NamedQuery(name="PersonalAddress.findAll", query="SELECT p FROM PersonalAddress p")
+@Table(name = "personal_address")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedQuery(name = "PersonalAddress.findAll", query = "SELECT p FROM PersonalAddress p")
 public class PersonalAddress implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String addressLine1;
 
 	private String addressLine2;
 
-	private int createdBy;
+	private Integer createdBy;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
 
 	private String landMark;
 
 	private String pinCode;
 
-	private int updatedBy;
+	private Integer updatedBy;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
 
-	//bi-directional many-to-one association to MasterCity
-	@ManyToOne
-	@JoinColumn(name="CityID")
+	// bi-directional many-to-one association to MasterCity
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "CityID")
 	private MasterCity masterCity;
 
-	//bi-directional many-to-one association to MasterCountry
-	@ManyToOne
-	@JoinColumn(name="CountryID")
+	// bi-directional many-to-one association to MasterCountry
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "CountryID")
 	private MasterCountry masterCountry;
 
-	//bi-directional many-to-one association to MasterState
-	@ManyToOne
-	@JoinColumn(name="StateID")
+	// bi-directional many-to-one association to MasterState
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "StateID")
 	private MasterState masterState;
 
-	//bi-directional many-to-one association to UserInfomation
-	@ManyToOne
-	@JoinColumn(name="UserID")
+	// bi-directional many-to-one association to UserInfomation
+	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+	@JoinColumn(name = "UserID")
 	private UserInfomation userInfomation;
 
 	public PersonalAddress() {
@@ -83,11 +86,11 @@ public class PersonalAddress implements Serializable {
 		this.addressLine2 = addressLine2;
 	}
 
-	public int getCreatedBy() {
+	public Integer getCreatedBy() {
 		return this.createdBy;
 	}
 
-	public void setCreatedBy(int createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -115,11 +118,11 @@ public class PersonalAddress implements Serializable {
 		this.pinCode = pinCode;
 	}
 
-	public int getUpdatedBy() {
+	public Integer getUpdatedBy() {
 		return this.updatedBy;
 	}
 
-	public void setUpdatedBy(int updatedBy) {
+	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
@@ -163,4 +166,14 @@ public class PersonalAddress implements Serializable {
 		this.userInfomation = userInfomation;
 	}
 
+	@Override
+	public String toString() {
+		return "PersonalAddress [id=" + id + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2
+				+ ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", landMark=" + landMark + ", pinCode="
+				+ pinCode + ", updatedBy=" + updatedBy + ", updatedDate=" + updatedDate + ", masterCity=" + masterCity
+				+ ", masterCountry=" + masterCountry + ", masterState=" + masterState + ", userInfomation="
+				+ userInfomation + "]";
+	}
+
+	
 }
