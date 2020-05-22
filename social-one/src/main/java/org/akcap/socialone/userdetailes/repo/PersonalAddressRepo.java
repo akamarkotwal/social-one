@@ -18,7 +18,7 @@ public interface PersonalAddressRepo extends JpaRepository<PersonalAddress, Inte
 	
 	
 	@QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
-	@Query(value="SELECT * FROM projectx.personal_address where UserID = ?", nativeQuery = true)
+	@Query(value="SELECT * FROM projectx.personal_address where UserID = ? ORDER BY id DESC LIMIT 1", nativeQuery = true)
 	public PersonalAddress findByUserID(@Param("UserID") int UserID);
 	
 	
