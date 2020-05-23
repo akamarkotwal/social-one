@@ -1,4 +1,4 @@
-package org.akcap.socialone.verification.serviceimpl;
+package org.akcap.socialone.notification;
 
 import java.io.IOException;
 import java.util.Date;
@@ -14,20 +14,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.akcap.socialone.verification.model.EmailMessage;
-import org.akcap.socialone.verification.service.EmailService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
-@Service
-public class EmailServiceImpl implements EmailService {
-	
-
+public class EmailSend {
 	@Value("${gmail.username}")
 	private String username;
 	@Value("${gmail.password}")
 	private String password;
 
-	@Override
+	
 	public void sendEmail(EmailMessage emailMessage) throws AddressException, MessagingException, IOException{
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -50,12 +45,6 @@ public class EmailServiceImpl implements EmailService {
 		msg.setSentDate(new Date());
 		Transport.send(msg);
 		
-	}
-
-	@Override
-	public String verfiyEmail() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
