@@ -1,6 +1,5 @@
 package org.akcap.socialone.entity;
 
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -18,9 +17,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 
 
 /**
@@ -28,10 +29,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * 
  */
 @Entity
-@Table(name="user_infomation")
+@Table(name = "user_infomation")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@NamedQuery(name="UserInfomation.findAll", query="SELECT u FROM UserInfomation u")
+@NamedQuery(name = "UserInfomation.findAll", query = "SELECT u FROM UserInfomation u")
 public class UserInfomation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -41,14 +42,12 @@ public class UserInfomation implements Serializable {
 
 	private Integer createdBy;
 
-	
 	private Date createdDate;
 
-	
 	private Date dob;
 
 	private String fname;
-	
+
 	private String email;
 
 	private byte isActive;
@@ -61,92 +60,86 @@ public class UserInfomation implements Serializable {
 
 	private Integer updatedBy;
 
-	
 	private Date updatedDate;
 
 	private String userName;
+
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
 
-	public List<Role> getRoles() {
-		return roles;
-	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
-	//bi-directional many-to-one association to AddFriend
-	@OneToMany(mappedBy="userInfomation1")
+	// bi-directional many-to-one association to AddFriend
+	@OneToMany(mappedBy = "userInfomation1")
 	private List<AddFriend> addFriends1;
 
-	//bi-directional many-to-one association to AddFriend
-	@OneToMany(mappedBy="userInfomation2")
+	// bi-directional many-to-one association to AddFriend
+	@OneToMany(mappedBy = "userInfomation2")
 	private List<AddFriend> addFriends2;
 
-	//bi-directional many-to-one association to CollegeDetail
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to CollegeDetail
+	@OneToMany(mappedBy = "userInfomation")
 	private List<CollegeDetail> collegeDetails;
 
-	//bi-directional many-to-one association to CommentReply
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to CommentReply
+	@OneToMany(mappedBy = "userInfomation")
 	private List<CommentReply> commentReplies;
 
-	//bi-directional many-to-one association to Comment
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to Comment
+	@OneToMany(mappedBy = "userInfomation")
 	private List<Comment> comments;
 
-	//bi-directional many-to-one association to CommentsLike
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to CommentsLike
+	@OneToMany(mappedBy = "userInfomation")
 	private List<CommentsLike> commentsLikes;
 
-	//bi-directional many-to-one association to Friendship
-	@OneToMany(mappedBy="userInfomation1")
+	// bi-directional many-to-one association to Friendship
+	@OneToMany(mappedBy = "userInfomation1")
 	private List<Friendship> friendships1;
 
-	//bi-directional many-to-one association to Friendship
-	@OneToMany(mappedBy="userInfomation2")
+	// bi-directional many-to-one association to Friendship
+	@OneToMany(mappedBy = "userInfomation2")
 	private List<Friendship> friendships2;
 
-	//bi-directional many-to-one association to HighschoolDetail
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to HighschoolDetail
+	@OneToMany(mappedBy = "userInfomation")
 	private List<HighschoolDetail> highschoolDetails;
 
-	//bi-directional many-to-one association to PersonalAddress
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to PersonalAddress
+	@OneToMany(mappedBy = "userInfomation")
 	private List<PersonalAddress> personalAddresses;
 
-	//bi-directional many-to-one association to PersonalDetail
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to PersonalDetail
+	@OneToMany(mappedBy = "userInfomation")
 	private List<PersonalDetail> personalDetails;
 
-	//bi-directional many-to-one association to PostLike
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to PostLike
+	@OneToMany(mappedBy = "userInfomation")
 	private List<PostLike> postLikes;
 
-	//bi-directional many-to-one association to Post
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to Post
+	@OneToMany(mappedBy = "userInfomation")
 	private List<Post> posts;
 
-	//bi-directional many-to-one association to ProfessionalDetail
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to ProfessionalDetail
+	@OneToMany(mappedBy = "userInfomation")
 	private List<ProfessionalDetail> professionalDetails;
 
-	//bi-directional many-to-one association to Share
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to Share
+	@OneToMany(mappedBy = "userInfomation")
 	private List<Share> shares;
 
-	//bi-directional many-to-one association to MasterGender
-	
+	// bi-directional many-to-one association to MasterGender
+
 	@ManyToOne
-	@JoinColumn(name="Gender")
+	@JoinColumn(name = "Gender")
 	private MasterGender masterGender;
 
-	//bi-directional many-to-one association to UserSociallink
-	@OneToMany(mappedBy="userInfomation")
+	// bi-directional many-to-one association to UserSociallink
+	@OneToMany(mappedBy = "userInfomation")
 	private List<UserSociallink> userSociallinks;
+
+	// bi-directional one-to-one association to Userlogin
+	@OneToOne(mappedBy = "userInfomation")
+	private Userlogin userlogin;
 
 	public UserInfomation() {
 	}
@@ -247,7 +240,6 @@ public class UserInfomation implements Serializable {
 		this.userName = userName;
 	}
 
-	
 	public String getEmail() {
 		return email;
 	}
@@ -615,20 +607,16 @@ public class UserInfomation implements Serializable {
 
 		return userSociallink;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "UserInfomation [id=" + id + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", dob=" + dob
-				+ ", fname=" + fname + ", email=" + email + ", isActive=" + isActive + ", isDelete=" + isDelete
-				+ ", lname=" + lname + ", password=" + password + ", updatedBy=" + updatedBy + ", updatedDate="
-				+ updatedDate + ", userName=" + userName + ", roles=" + roles + ", addFriends1=" + addFriends1
-				+ ", addFriends2=" + addFriends2 + ", collegeDetails=" + collegeDetails + ", commentReplies="
-				+ commentReplies + ", comments=" + comments + ", commentsLikes=" + commentsLikes + ", friendships1="
-				+ friendships1 + ", friendships2=" + friendships2 + ", highschoolDetails=" + highschoolDetails
-				+ ", personalAddresses=" + personalAddresses + ", personalDetails=" + personalDetails + ", postLikes="
-				+ postLikes + ", posts=" + posts + ", professionalDetails=" + professionalDetails + ", shares=" + shares
-				+ ", masterGender=" + masterGender + ", userSociallinks=" + userSociallinks + "]";
+	public Userlogin getUserlogin() {
+		return userlogin;
+	}
+
+	public void setUserlogin(Userlogin userlogin) {
+		this.userlogin = userlogin;
 	}
 
 	
+
 }

@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.akcap.socialone.auth.repo.UserRepo;
 import org.akcap.socialone.entity.UserInfomation;
+import org.akcap.socialone.entity.Userlogin;
+import org.akcap.socialone.userdetailes.repo.UserloginRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,15 +19,12 @@ import org.springframework.stereotype.Service;
 public class JwtUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepo userRepo;
-
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
+	private UserloginRepo userloginRepo;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		UserInfomation user = userRepo.findByuserName(username);
+		Userlogin user = userloginRepo.findByuserName(username);
 
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
@@ -35,13 +34,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	}
 
-	private Set getAuthority(UserInfomation user) {
-        Set authorities = new HashSet<>();
+	private Set getAuthority(Userlogin user) {
+		Set authorities = new HashSet<>();
 		user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
 		});
 		return authorities;
 	}
-	
 
 }

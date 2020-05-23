@@ -3,6 +3,9 @@ package org.akcap.socialone.userdetailes.model;
 import java.util.Date;
 
 public class UserDTO {
+	
+	private int userID;
+	
 	private String fname;
 
 	private String lname;
@@ -16,6 +19,16 @@ public class UserDTO {
 	
 	private String email;
 	
+	
+	
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
 	public Date getDob() {
 		return dob;
 	}

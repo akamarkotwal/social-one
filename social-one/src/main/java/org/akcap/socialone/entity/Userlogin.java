@@ -3,7 +3,11 @@ package org.akcap.socialone.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+
+
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -25,13 +29,23 @@ public class Userlogin implements Serializable {
 
 	private byte isDelete;
 
-	private String loginUserName;
+	@Column(name="LoginUserName")
+	private String userName;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	
 	private Date modifiedAt;
 
 	private String password;
+	
+	@OneToOne
+	@JoinColumn(name="userID")
+	private UserInfomation userInfomation;
 
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<Role> roles;
+	
 	public Userlogin() {
 	}
 
@@ -67,12 +81,14 @@ public class Userlogin implements Serializable {
 		this.isDelete = isDelete;
 	}
 
-	public String getLoginUserName() {
-		return this.loginUserName;
+	
+
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setLoginUserName(String loginUserName) {
-		this.loginUserName = loginUserName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public Date getModifiedAt() {
@@ -91,4 +107,21 @@ public class Userlogin implements Serializable {
 		this.password = password;
 	}
 
+	public UserInfomation getUserInfomation() {
+		return userInfomation;
+	}
+
+	public void setUserInfomation(UserInfomation userInfomation) {
+		this.userInfomation = userInfomation;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	
 }

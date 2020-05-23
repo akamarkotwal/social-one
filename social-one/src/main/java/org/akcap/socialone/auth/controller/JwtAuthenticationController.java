@@ -3,6 +3,10 @@ package org.akcap.socialone.auth.controller;
 import org.akcap.socialone.auth.model.JwtRequest;
 import org.akcap.socialone.auth.model.JwtResponse;
 import org.akcap.socialone.auth.service.JwtUserDetailsService;
+import org.akcap.socialone.entity.UserInfomation;
+import org.akcap.socialone.entity.Userlogin;
+import org.akcap.socialone.userdetailes.service.UserRegisterServices;
+import org.akcap.socialone.userdetailes.service.UserloginService;
 import org.akcap.socialone.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("/socialone")
 public class JwtAuthenticationController {
+	
+	@Autowired
+	private UserloginService userloginService;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -33,6 +40,10 @@ public class JwtAuthenticationController {
 
 	@PostMapping(value = "/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+		Userlogin infomation= userloginService.findByUserLogin(authenticationRequest.getUsername());
+		if(infomation==null) {
+			return ResponseEntity.ok("Please entere valid creaditional");
+		}
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 

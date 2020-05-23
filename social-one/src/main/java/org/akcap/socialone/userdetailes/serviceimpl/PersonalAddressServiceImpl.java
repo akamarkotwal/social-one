@@ -22,7 +22,7 @@ public class PersonalAddressServiceImpl implements PersonalAddressService {
 
 	@Override
 	public PersonalAddress saveAddress(PersonalAddressDTO addressDTO) {
-		PersonalAddress personalAddress = addressRepo.findByUserID(addressDTO.getUserID());
+		 PersonalAddress personalAddress = addressRepo.findByUserID(addressDTO.getUserID());
 		if (personalAddress != null) {
 
 			if (personalAddress.getAddressLine1().equals(addressDTO.getAddressLine1())
