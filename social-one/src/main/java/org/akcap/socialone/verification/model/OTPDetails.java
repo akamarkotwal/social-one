@@ -1,4 +1,4 @@
-package org.akcap.socialone.util;
+package org.akcap.socialone.verification.model;
 
 public class OTPDetails {
 	private String email;

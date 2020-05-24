@@ -1,4 +1,4 @@
-package org.akcap.socialone.verification.model;
+package org.akcap.socialone.notification;
 
 public class EmailMessage {
 

@@ -13,17 +13,14 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.akcap.socialone.verification.model.EmailMessage;
-import org.springframework.beans.factory.annotation.Value;
-
 public class EmailSend {
-	@Value("${gmail.username}")
-	private String username;
-	@Value("${gmail.password}")
-	private String password;
+	
+	private String username="aaaaa@gmail.com";
+	
+	private String password="aaaa@111";
 
 	
-	public void sendEmail(EmailMessage emailMessage) throws AddressException, MessagingException, IOException{
+	public  void sendEmail(EmailMessage emailMessage) throws AddressException, MessagingException, IOException{
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -36,6 +33,9 @@ public class EmailSend {
 						return new PasswordAuthentication(username, password);
 					}
 				  });
+		
+		System.out.println("username in email"+username);
+		System.out.println("password in email"+password);
 		Message msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress(username, false));
 
