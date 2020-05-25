@@ -1,6 +1,7 @@
 package org.akcap.socialone.verification.model;
 
 public class OTPDetails {
+	private int userID;
 	private String email;
 	private String otp;
 	private long expirytime;
@@ -8,6 +9,15 @@ public class OTPDetails {
 	public OTPDetails() {
 		super();
 	}
+	
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
 	public String getEmail() {
 		return email;
 	}

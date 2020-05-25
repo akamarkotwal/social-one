@@ -15,9 +15,9 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailSend {
 	
-	private String username="aaaaa@gmail.com";
+	private String username="akamarkotwal@gmail.com";
 	
-	private String password="aaaa@111";
+	private String password="admin@111";
 
 	
 	public  void sendEmail(EmailMessage emailMessage) throws AddressException, MessagingException, IOException{
@@ -34,8 +34,7 @@ public class EmailSend {
 					}
 				  });
 		
-		System.out.println("username in email"+username);
-		System.out.println("password in email"+password);
+		
 		Message msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress(username, false));
 
