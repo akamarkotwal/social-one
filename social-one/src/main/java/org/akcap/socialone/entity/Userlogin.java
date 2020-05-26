@@ -1,6 +1,5 @@
 package org.akcap.socialone.entity;
 
-
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -9,13 +8,12 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the userlogin database table.
  * 
  */
 @Entity
-@NamedQuery(name="Userlogin.findAll", query="SELECT u FROM Userlogin u")
+@NamedQuery(name = "Userlogin.findAll", query = "SELECT u FROM Userlogin u")
 public class Userlogin implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,23 +27,25 @@ public class Userlogin implements Serializable {
 
 	private byte isDelete;
 
-	@Column(name="LoginUserName")
+	@Column(name = "LoginUserName")
 	private String userName;
 
-	
 	private Date modifiedAt;
 
 	private String password;
-	
+
 	@OneToOne
-	@JoinColumn(name="userID")
+	@JoinColumn(name = "userID")
 	private UserInfomation userInfomation;
 
-	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;
-	
+
+	// bi-directional many-to-one association to PasswordForget
+	@OneToMany(mappedBy = "userlogin")
+	private List<PasswordForget> passwordForgets;
+
 	public Userlogin() {
 	}
 
@@ -80,8 +80,6 @@ public class Userlogin implements Serializable {
 	public void setIsDelete(byte isDelete) {
 		this.isDelete = isDelete;
 	}
-
-	
 
 	public String getUserName() {
 		return userName;
@@ -123,5 +121,4 @@ public class Userlogin implements Serializable {
 		this.roles = roles;
 	}
 
-	
 }
