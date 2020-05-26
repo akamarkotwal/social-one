@@ -48,7 +48,7 @@ public class OTPServiceImpl implements OTPService {
 					if (otpDetails2.getOtp().equals(otpDetails.getOtp())) {
 						System.out.println("userID is " + otpDetails.getUserID());
 						LOGGER.info("otp verification sucessfully");
-						Integer ID = otpDetails.getUserID();
+						
 						UserInfomation infomation = userRepo.findByEmail(email);
 						Userlogin userlogin = new Userlogin();
 						userlogin.setUserID(infomation.getId());
