@@ -3,6 +3,7 @@ package org.akcap.socialone.verification.serviceimpl;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.akcap.socialone.auth.model.PassordReq;
 import org.akcap.socialone.auth.repo.UserRepo;
 import org.akcap.socialone.entity.UserInfomation;
 import org.akcap.socialone.entity.Userlogin;
@@ -76,5 +77,6 @@ public class OTPServiceImpl implements OTPService {
 		LOGGER.info("Email  not found!");
 		return "D";
 	}
+
 
 }

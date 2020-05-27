@@ -1,6 +1,7 @@
 package org.akcap.socialone.verification.service;
 
 
+import org.akcap.socialone.auth.model.PassordReq;
 import org.akcap.socialone.verification.model.OTPDetails;
 import org.springframework.stereotype.Component;
 
@@ -9,5 +10,8 @@ public interface OTPService {
 	public OTPDetails getOtp(String email);
 	
 	public String verifyOtp(String email, OTPDetails otpDetails);
+	
+	
+	
 
 }
