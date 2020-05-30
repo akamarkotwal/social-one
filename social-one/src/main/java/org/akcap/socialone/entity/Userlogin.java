@@ -46,6 +46,14 @@ public class Userlogin implements Serializable {
 	@OneToMany(mappedBy = "userlogin")
 	private List<PasswordForget> passwordForgets;
 
+	public List<PasswordForget> getPasswordForgets() {
+		return passwordForgets;
+	}
+
+	public void setPasswordForgets(List<PasswordForget> passwordForgets) {
+		this.passwordForgets = passwordForgets;
+	}
+
 	public Userlogin() {
 	}
 

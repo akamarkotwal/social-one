@@ -90,7 +90,7 @@ public class PasswordForgetController {
 		} else if (res.contains("B")) {
 			responseMessage.setStatuscode(0);
 			responseMessage.setStatus("Failed");
-			responseMessage.setMessage("otp is wronged");
+			responseMessage.setMessage("otp is wronged or expired");
 			responseMessage.setData(null);
 			return new ResponseEntity<>(responseMessage, HttpStatus.OK);
 

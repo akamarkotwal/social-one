@@ -22,7 +22,5 @@ public interface PersonalAddressRepo extends JpaRepository<PersonalAddress, Inte
 	public PersonalAddress findByUserID(@Param("UserID") int UserID);
 	
 	
-	
-	
 
 }

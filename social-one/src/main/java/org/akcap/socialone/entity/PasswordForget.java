@@ -44,7 +44,7 @@ public class PasswordForget implements Serializable {
 	private Date updateDate;
 
 	//bi-directional many-to-one association to Userlogin
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="UserID")
 	private Userlogin userlogin;
 

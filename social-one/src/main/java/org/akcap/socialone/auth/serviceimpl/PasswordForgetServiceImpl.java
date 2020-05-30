@@ -1,6 +1,9 @@
 package org.akcap.socialone.auth.serviceimpl;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 import javax.mail.MessagingException;
@@ -91,7 +94,11 @@ public class PasswordForgetServiceImpl implements PasswordForgetService {
 		Userlogin userlogin = userloginRepo.findByuserName(passordReq.getEmail());
 		if (userlogin != null) {
 			PasswordForget passwordForget = passwordForgetRepo.findByUserID(userlogin.getUserID());
-			if (passordReq.getOtp().equals(passwordForget.getToken())) {
+			LocalDate today = LocalDate.now();
+			Date date=passwordForget.getCreateDateTime();
+			LocalDate tokendate=date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			Period p=Period.between(tokendate, today);
+			if (passordReq.getOtp().equals(passwordForget.getToken()) && p.getDays()<2 ) {
 				Userlogin userlogin2 = new Userlogin();
 				userlogin2.setUserID(userlogin.getUserID());
 				userlogin2.setCreatedAt(userlogin.getCreatedAt());
@@ -100,6 +107,8 @@ public class PasswordForgetServiceImpl implements PasswordForgetService {
 				userlogin2.setUserName(userlogin.getUserName());
 				userlogin2.setUserInfomation(userlogin.getUserInfomation());
 				userlogin2.setPassword(bcryptEncoder.encode(passordReq.getPassword()));
+				userlogin2.setRoles(userlogin.getRoles());
+				
 				userlogin2.setModifiedAt(new Date());
 				userloginRepo.save(userlogin2);
 
