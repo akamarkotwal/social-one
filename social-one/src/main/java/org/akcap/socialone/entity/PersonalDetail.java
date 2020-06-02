@@ -22,6 +22,7 @@ public class PersonalDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private int createdBy;
@@ -47,7 +48,7 @@ public class PersonalDetail implements Serializable {
 	private Date updatedDate;
 
 	//bi-directional many-to-one association to UserInfomation
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="UserID")
 	private UserInfomation userInfomation;
 
