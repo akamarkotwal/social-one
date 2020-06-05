@@ -46,8 +46,8 @@ public class PersonalDetailServiceImpl implements PersonalDetailService {
 
 	@Override
 	public PersonalDetail findByUserId(int UserID) {
-		// TODO Auto-generated method stub
-		return null;
+		return personalDetailRepo.findByUserID(UserID);
+
 	}
 
 	@Override
@@ -69,9 +69,9 @@ public class PersonalDetailServiceImpl implements PersonalDetailService {
 
 	@Override
 	public PersonalDetail uploadImages(int userId, MultipartFile file) {
-		PersonalDetail personalDetail= personalDetailRepo.findByUserID(userId);
-		if(personalDetail!=null) {
-			PersonalDetail detail=new PersonalDetail();
+		PersonalDetail personalDetail = personalDetailRepo.findByUserID(userId);
+		if (personalDetail != null) {
+			PersonalDetail detail = new PersonalDetail();
 			detail.setId(personalDetail.getId());
 			detail.setCreatedBy(personalDetail.getCreatedBy());
 			detail.setCreatedDate(personalDetail.getCreatedDate());
@@ -84,16 +84,16 @@ public class PersonalDetailServiceImpl implements PersonalDetailService {
 			detail.setUpdatedBy(personalDetail.getUpdatedBy());
 			detail.setUpdatedDate(new Date());
 			try {
-				String imageAdress= PersonalDetailServiceImpl.ImageUpload(file);
+				String imageAdress = PersonalDetailServiceImpl.ImageUpload(file);
 				detail.setProfilePic(imageAdress);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			return personalDetailRepo.save(detail);
 		}
-		
+
 		return null;
 	}
 }

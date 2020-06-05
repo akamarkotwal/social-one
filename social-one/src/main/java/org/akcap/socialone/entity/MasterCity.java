@@ -1,6 +1,5 @@
 package org.akcap.socialone.entity;
 
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,15 +11,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
-
 /**
  * The persistent class for the master_city database table.
  * 
  */
 @Entity
-@Table(name="master_city")
+@Table(name = "master_city")
 @Cacheable
-@NamedQuery(name="MasterCity.findAll", query="SELECT m FROM MasterCity m")
+@NamedQuery(name = "MasterCity.findAll", query = "SELECT m FROM MasterCity m")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class MasterCity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,13 +28,17 @@ public class MasterCity implements Serializable {
 
 	private String name;
 
-	//bi-directional many-to-one association to MasterState
+	// bi-directional many-to-one association to MasterState
 	@ManyToOne
-	@JoinColumn(name="StateId")
+	@JoinColumn(name = "StateId")
 	private MasterState masterState;
-	
-	@OneToMany(mappedBy="masterCity")
+
+	@OneToMany(mappedBy = "masterCity")
 	private List<PersonalAddress> personalAddresses;
+
+	// bi-directional many-to-one association to ProfessionalDetail
+	@OneToMany(mappedBy = "masterCity")
+	private List<ProfessionalDetail> professionalDetails;
 
 	public MasterCity() {
 	}
@@ -65,6 +67,7 @@ public class MasterCity implements Serializable {
 	public void setMasterState(MasterState masterState) {
 		this.masterState = masterState;
 	}
+
 	public List<PersonalAddress> getPersonalAddresses() {
 		return this.personalAddresses;
 	}
@@ -87,4 +90,13 @@ public class MasterCity implements Serializable {
 		return personalAddress;
 	}
 
+	public List<ProfessionalDetail> getProfessionalDetails() {
+		return professionalDetails;
+	}
+
+	public void setProfessionalDetails(List<ProfessionalDetail> professionalDetails) {
+		this.professionalDetails = professionalDetails;
+	}
+
+	
 }

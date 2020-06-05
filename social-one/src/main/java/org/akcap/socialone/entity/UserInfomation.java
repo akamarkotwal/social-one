@@ -22,6 +22,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 
 /**
@@ -108,6 +110,7 @@ public class UserInfomation implements Serializable {
 	private List<PersonalAddress> personalAddresses;
 
 	// bi-directional many-to-one association to PersonalDetail
+	@JsonManagedReference
 	@OneToMany(mappedBy = "userInfomation")
 	private List<PersonalDetail> personalDetails;
 

@@ -10,6 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,5 +86,36 @@ public class PersonalDetailController {
 			return ResponseEntity.ok(responseMessage);
 
 		}
+	}
+
+	@GetMapping("/getbyid/{userID}")
+	public ResponseEntity<?> getByUser(@PathVariable Integer userID) {
+		SingaleResponceMessages<?> responseMessage = new SingaleResponceMessages<>();
+		if ( userID == null) {
+			LOGGER.error("Field is missing from body");
+			responseMessage.setStatuscode(0);
+			responseMessage.setStatus("Failed");
+			responseMessage.setMessage("Please Provide User Id");
+			responseMessage.setData(null);
+			return ResponseEntity.ok(responseMessage);
+		}
+		else {
+			PersonalDetail personalDetail = personalDetailService.findByUserId(userID);
+			if (personalDetail != null) {
+				responseMessage.setStatuscode(1);
+				responseMessage.setStatus("Success");
+				responseMessage.setMessage("Personal Detail Getting sucessfully");
+				responseMessage.setData(personalDetail);
+
+				return ResponseEntity.ok(responseMessage);
+			}
+			responseMessage.setStatuscode(0);
+			responseMessage.setStatus("Failed");
+			responseMessage.setMessage("User Not Found");
+			responseMessage.setData(null);
+			return ResponseEntity.ok(responseMessage);
+
+		}
+
 	}
 }

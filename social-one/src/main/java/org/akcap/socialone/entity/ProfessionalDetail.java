@@ -1,31 +1,33 @@
 package org.akcap.socialone.entity;
 
-
 import java.io.Serializable;
 import javax.persistence.*;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import java.util.Date;
 
+import java.util.Date;
 
 /**
  * The persistent class for the professional_details database table.
  * 
  */
 @Entity
-@Table(name="professional_details")
+@Table(name = "professional_details")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@NamedQuery(name="ProfessionalDetail.findAll", query="SELECT p FROM ProfessionalDetail p")
+@NamedQuery(name = "ProfessionalDetail.findAll", query = "SELECT p FROM ProfessionalDetail p")
 public class ProfessionalDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="`City/Town`")
-	private String city_Town;
+	// bi-directional many-to-one association to MasterCity
+	@ManyToOne
+	@JoinColumn(name = "`City/Town`")
+	private MasterCity masterCity;
 
 	private int createdBy;
 
@@ -49,9 +51,9 @@ public class ProfessionalDetail implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
 
-	//bi-directional many-to-one association to UserInfomation
+	// bi-directional many-to-one association to UserInfomation
 	@ManyToOne
-	@JoinColumn(name="UserId")
+	@JoinColumn(name = "UserId")
 	private UserInfomation userInfomation;
 
 	public ProfessionalDetail() {
@@ -65,12 +67,14 @@ public class ProfessionalDetail implements Serializable {
 		this.id = id;
 	}
 
-	public String getCity_Town() {
-		return this.city_Town;
+	
+
+	public MasterCity getMasterCity() {
+		return masterCity;
 	}
 
-	public void setCity_Town(String city_Town) {
-		this.city_Town = city_Town;
+	public void setMasterCity(MasterCity masterCity) {
+		this.masterCity = masterCity;
 	}
 
 	public int getCreatedBy() {
@@ -153,4 +157,14 @@ public class ProfessionalDetail implements Serializable {
 		this.userInfomation = userInfomation;
 	}
 
+	@Override
+	public String toString() {
+		return "ProfessionalDetail [id=" + id + ", masterCity=" + masterCity + ", createdBy=" + createdBy
+				+ ", createdDate=" + createdDate + ", description=" + description + ", endDate=" + endDate
+				+ ", organization=" + organization + ", position=" + position + ", startDate=" + startDate
+				+ ", updatedBy=" + updatedBy + ", updatedDate=" + updatedDate + ", userInfomation=" + userInfomation
+				+ "]";
+	}
+
+	
 }

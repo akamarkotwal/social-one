@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Date;
 
 
@@ -48,6 +50,7 @@ public class PersonalDetail implements Serializable {
 	private Date updatedDate;
 
 	//bi-directional many-to-one association to UserInfomation
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="UserID")
 	private UserInfomation userInfomation;
