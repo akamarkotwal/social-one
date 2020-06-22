@@ -9,6 +9,7 @@ import org.akcap.socialone.entity.UserInfomation;
 import org.akcap.socialone.userdetailes.model.ProfessionalDetailDTO;
 import org.akcap.socialone.userdetailes.repo.ProfessionalDetailRepo;
 import org.akcap.socialone.userdetailes.service.ProfessionalDetailService;
+import org.akcap.socialone.util.DateEqulaityCheck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class ProfessionalDetailServiceImpl implements ProfessionalDetailService 
 	@Override
 	public ProfessionalDetail saveUpdate(ProfessionalDetailDTO professionalDetailDTO) {
 		ProfessionalDetail detail = professionalDetailRepo.findByUserID(professionalDetailDTO.getUserID());
+		System.out.println(professionalDetailDTO);
 		System.out.println(detail);
 		if (detail != null) {
 
@@ -29,8 +31,8 @@ public class ProfessionalDetailServiceImpl implements ProfessionalDetailService 
 					&& professionalDetailDTO.getDescription().contentEquals(detail.getDescription())
 					&& professionalDetailDTO.getOrganization().contentEquals(detail.getOrganization()) 
 					&& professionalDetailDTO.getPosition().contentEquals(detail.getPosition())
-					&& professionalDetailDTO.getStartDate() == detail.getStartDate()
-					&& professionalDetailDTO.getEndDate() == detail.getEndDate()) {
+					&& DateEqulaityCheck.checkdate(professionalDetailDTO.getStartDate(), detail.getStartDate())==true
+					&& DateEqulaityCheck.checkdate(professionalDetailDTO.getEndDate(), detail.getEndDate())==true) {
 
 				return detail;
 			}

@@ -78,5 +78,12 @@ public class ProfessionalDetailDTO {
 		this.startDate = startDate;
 	}
 
+	@Override
+	public String toString() {
+		return "ProfessionalDetailDTO [userID=" + userID + ", cityID=" + cityID + ", description=" + description
+				+ ", endDate=" + endDate + ", organization=" + organization + ", position=" + position + ", startDate="
+				+ startDate + "]";
+	}
+
 	
 }
