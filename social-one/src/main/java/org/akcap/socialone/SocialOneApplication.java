@@ -8,6 +8,7 @@ public class SocialOneApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SocialOneApplication.class, args);
+		System.out.println();
 	}
 
 }
